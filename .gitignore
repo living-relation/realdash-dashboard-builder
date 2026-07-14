@@ -1,0 +1,25 @@
+# Secrets — never commit
+CREDENTIALS.md
+**/.env
+**/.env.*
+**/secrets/
+**/*secret*
+**/*password*
+
+# Pi deploy helpers (contain host/auth details if reintroduced)
+tools/pi_ssh.py
+tools/deploy_pi.py
+tools/fix_pi_kiosk.py
+tools/pi-files/
+
+# Local bulk / temp
+_build/shots/*
+!_build/shots/.gitkeep
+_build/backup/*.tmp
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.cursor/
