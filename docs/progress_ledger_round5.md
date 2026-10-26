@@ -22,6 +22,10 @@
 ## ROUND 5 COMPLETE
 All five tasks done and verified. Final state: v9 active, sim ON, ten dashes deployed to both roots, backups in `_build\backup\r5_20260708_062333\`.
 
+## Open items
+- [ ] Coolant pressure gauge tile was built with a 250 kPa range. Set it to 200 kPa (matches st185 decision R105).
+- [ ] Dashboard has not been flashed to the Pi yet — CAN bus setup also has to be updated to match the current st185 Link ECU CAN stream. Do both (200 kPa range + CAN stream match) before flashing.
+
 ## Log
 - 2026-07-08 06:20 (coordinator): ledger created; round-5 worker launched.
 - 06:22 state verified: app up, sim ON, **active dash = v9** (not v5) — Glacier Avionics on screen, both dials visibly elliptical (matches user shot). Will restore v9 at wrap-up.
@@ -32,4 +36,5 @@ All five tasks done and verified. Final state: v9 active, sim ON, ten dashes dep
 - 08:12 starting v10 build.
 - 08:20 v10 "MERIDIAN GT" built (it1) → it2 (copper needle splice, chip/badge fixes); magenta-disc calib 648x648 ratio 1.0000; sim burst verified (dial sweep, hard on/off pills, CRUISE words, RaceHead minus).
 - 08:27 deploy + final shots done; v9 reloaded (active) + sim on; skill polished; ledger closed.
+- 2026-10-26: Open items — CoolP range 250→200 kPa (R105); do not flash to Pi until dash range and CAN stream both match current Link ECU.
 - 06:40 **ASPECT COMPENSATION MEASURED (Task 3):** magenta-disc calibration (full-bleed circle spliced over roundface.png, square 230x230 rect) renders **552x479 px** ⇒ the 800x480 design canvas maps to EXACTLY 1920x1000 px (the header canvas units). Per-axis scales: x 2.4 px/unit, y 2.08333 px/unit. **FORMULA: h_design = K × w_design with K = (1920/800)/(1000/480) = 1.152 exactly** (keep the center fixed when resizing). K is canvas-header-invariant (scale-to-fit preserves it on other windows). Cross-check: v4 arc fill boxes measured 1.158/1.12 ✓. CAUTION for future measurement scripts: measuring "ring width/height" from white tick extremes is WRONG when majors sit at 157.5°/22.5° (gave a bogus 1.708) — calibrate with a full-bleed disc or row-scan the hairline ring. Probe file r5_probe_aspect.rd (throwaway, in Downloads — delete at wrap-up).
