@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No package.json / npm scripts in this repo. Formal lint/typecheck/test
+      # scripts do not exist yet; CI covers the checks that do: Python syntax
+      # of tools/, and that every shipped .rd still parses with rd_lib2
+      # (stdlib only — do not pip install tools/requirements.txt here;
+      # those deps are PyAutoGUI/desktop automation for a Windows host).
+      - name: Syntax-check tools
+        run: python -m compileall -q tools
+
+      - name: Parse dashboards
+        run: python tools/ci_smoke.py
